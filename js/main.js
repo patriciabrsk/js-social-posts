@@ -169,7 +169,7 @@ const posts = [
 const container = document.getElementById("container");
 
 function printPost(data) {
-    for (let i = 0; i < posts.length; i++) {
+    // for (let i = 0; i < posts.length; i++) {
         let post = document.createElement('div');
         post.classList.add('post');
         container.appendChild(post);
@@ -194,11 +194,60 @@ function printPost(data) {
             postMetaIcon.appendChild(profileImg);
         } else {
             const fullName = data.author.name.split(' ');
-            const initials = fullName.shift().charAt(0).toUpperCase() + fullName.pop().charAt(0).toUpperCase();
-            console.log(initials);
+            const initials = fullName[0][0].toUpperCase();
+
+            const noProfileImg = document.createElement('h3');
+            noProfileImg.classList.add('initals');
+            noProfileImg.innerHTML = initials;
+            postMetaIcon.appendChild(profileImg);
         }
+
+        const metaData = document.createElement('div');
+        metaData.classList.add('post-meta__data');
+        postMeta.appendChild(metaData);
+
+        const metaAuthor = document.createElement('div');
+        metaData.classList.add('post-meta__author');
+        postMetaData.appendChild(metaAuthor);
+
+        const metaTime = document.createElement('div');
+        metaData.classList.add('post-meta__time');
+        postMetaData.appendChild(metaTime);
+
+        const postText = document.createElement('div');
+        postText.classList.add('post__text');
+        post.appendChild(postText);
+
+        const postImgDiv = document.createElement('div');
+        postText.classList.add('post__image');
+        post.appendChild(postImgDiv);
+
+        const postImg = document.createElement('img');
+        postImg.src = data.media;
+        postImgDiv.appendChild(postImg);
+
+        const postFooter = document.createElement('div');
+        postFooter.classList.add('post__footer');
+        post.appendChild(postFooter);
+
+        const likes = document.createElement('div');
+        likes.classList.add('likes', 'js-likes');
+        postFooter.appendChild(likes);
+
+        const likes__cta = document.createElement('div');
+        likes__cta.classList.add('likes__cta');
+        likes.appendChild(likes__cta);
+
+        const likeBtn = document.createElement('a');
+        likeBtn.classList.add('like-button', 'js-like-button');
+        likeBtn['data-postid'] = data.id;
+
+        const likeBtnIcon = document.createElement('i');
+        likeBtnIcon.classList.add('like-button__icon', 'fas', 'fa-thumbs-up');
+        likeBtnIcon.setAttribute('aria-hidden', 'true');
+
         
-    }
+    // }
+    return post;
 }
 
-console.log
