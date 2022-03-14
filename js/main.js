@@ -234,19 +234,25 @@ function printPost(data) {
         likes.classList.add('likes', 'js-likes');
         postFooter.appendChild(likes);
 
-        const likes__cta = document.createElement('div');
-        likes__cta.classList.add('likes__cta');
-        likes.appendChild(likes__cta);
+        const likesCta = document.createElement('div');
+        likesCta.classList.add('likes__cta');
+        likes.appendChild(likesCta);
 
         const likeBtn = document.createElement('a');
         likeBtn.classList.add('like-button', 'js-like-button');
         likeBtn['data-postid'] = data.id;
+        likesCta.appendChild(likeBtn);
 
         const likeBtnIcon = document.createElement('i');
         likeBtnIcon.classList.add('like-button__icon', 'fas', 'fa-thumbs-up');
         likeBtnIcon.setAttribute('aria-hidden', 'true');
+        likeBtn.appendChild(likeBtnIcon);
 
-        
+        const counter = document.createElement('div');
+        counter.classList.add('likes__counter');
+        counter.innerHTML = `Piace a <b id="like-counter-${data.id}" class="js-likes-counter">${data.likes}</b> persone`;
+        likes.appendChild(counter);
+
     // }
     return post;
 }
