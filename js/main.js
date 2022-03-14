@@ -137,9 +137,9 @@ const posts = [
         "media": "https://unsplash.it/600/400?image=534",
         "author": {
             "name": "Giulia Bronner",
-            "image": "https://unsplash.it/300/300?image=29"
+            "image": null
         },
-        "likes": 302,
+        "likes": 30,
         "created": "2022-03-10"
     },
     {
@@ -150,7 +150,7 @@ const posts = [
             "name": "Filippo Petricca",
             "image": "https://unsplash.it/300/300?image=29"
         },
-        "likes": 302,
+        "likes": 32,
         "created": "2022-03-06"
     },
     {
@@ -161,7 +161,7 @@ const posts = [
             "name": "Filippo Gioachini",
             "image": "https://unsplash.it/300/300?image=29"
         },
-        "likes": 302,
+        "likes": 2,
         "created": "2022-03-01"
     }
 ];
@@ -193,7 +193,7 @@ function printPost(data) {
             postMetaIcon.appendChild(profileImg);
         } else {
             const fullName = data.author.name.split(' ');
-            const initials = fullName[0][0].toUpperCase();
+            const initials = fullName[0].charAt(0).toUpperCase() + fullName[1].charAt(0).toUpperCase();
 
             const noProfileImg = document.createElement('h3');
             noProfileImg.classList.add('initals', 'profile-pic-default');
@@ -242,13 +242,19 @@ function printPost(data) {
 
         const likeBtn = document.createElement('a');
         likeBtn.classList.add('like-button', 'js-like-button');
-        likeBtn['data-postid'] = data.id;
+        likeBtn['liked-id'] = data.id;
         likesCta.appendChild(likeBtn);
 
         const likeBtnIcon = document.createElement('i');
         likeBtnIcon.classList.add('like-button__icon', 'fas', 'fa-thumbs-up');
         likeBtnIcon.setAttribute('aria-hidden', 'true');
         likeBtn.appendChild(likeBtnIcon);
+
+        const likeBtnLabel = document.createElement('span');
+        likeBtnLabel.classList.add('like-button__label');
+        likeBtnLabel.innerText = "Mi Piace";
+        likeBtn.appendChild(likeBtnLabel);
+
 
         const counter = document.createElement('div');
         counter.classList.add('likes__counter');
@@ -266,7 +272,14 @@ const likedPosts = [];
 
 const buttons = document.getElementsByClassName('js-like-button');
 buttons.forEach((button) => {
-    button.addEventListener('click', () => {
+    button.addEventListener('click', (event) => {
+        let liked = event.classList.toggle('like-button--liked');
+
+        if (liked) {
+            counter.innerHTML = `Piace a <b id="like-counter-${data.id}" class="js-likes-counter">${data.likes++}</b> persone`;
+        } else {
+            counter.innerHTML = `Piace a <b id="like-counter-${data.id}" class="js-likes-counter">${data.likes--}</b> persone`;
+        }
 
     });
 });
