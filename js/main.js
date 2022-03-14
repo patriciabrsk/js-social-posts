@@ -136,7 +136,7 @@ const posts = [
         "content": "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
         "media": "https://unsplash.it/600/400?image=534",
         "author": {
-            "name": "Selene Tagiuri",
+            "name": "Giulia Bronner",
             "image": "https://unsplash.it/300/300?image=29"
         },
         "likes": 302,
@@ -158,7 +158,7 @@ const posts = [
         "content": "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
         "media": "https://unsplash.it/600/400?image=534",
         "author": {
-            "name": "Filippo Petricca",
+            "name": "Filippo Gioachini",
             "image": "https://unsplash.it/300/300?image=29"
         },
         "likes": 302,
@@ -169,7 +169,6 @@ const posts = [
 const container = document.getElementById("container");
 
 function printPost(data) {
-    // for (let i = 0; i < posts.length; i++) {
         let post = document.createElement('div');
         post.classList.add('post');
         container.appendChild(post);
@@ -197,29 +196,32 @@ function printPost(data) {
             const initials = fullName[0][0].toUpperCase();
 
             const noProfileImg = document.createElement('h3');
-            noProfileImg.classList.add('initals');
+            noProfileImg.classList.add('initals', 'profile-pic-default');
             noProfileImg.innerHTML = initials;
-            postMetaIcon.appendChild(profileImg);
+            postMetaIcon.appendChild(noProfileImg);
         }
 
-        const metaData = document.createElement('div');
-        metaData.classList.add('post-meta__data');
-        postMeta.appendChild(metaData);
+        const postMetaData = document.createElement('div');
+        postMetaData.classList.add('post-meta__data');
+        postMeta.appendChild(postMetaData);
 
-        const metaAuthor = document.createElement('div');
-        metaData.classList.add('post-meta__author');
-        postMetaData.appendChild(metaAuthor);
+        const postMetaAuthor = document.createElement('div');
+        postMetaAuthor.classList.add('post-meta__author');
+        postMetaAuthor.innerHTML = data.author.name;
+        postMetaData.appendChild(postMetaAuthor);
 
-        const metaTime = document.createElement('div');
-        metaData.classList.add('post-meta__time');
-        postMetaData.appendChild(metaTime);
+        const postMetaTime = document.createElement('div');
+        postMetaTime.classList.add('post-meta__time');
+        postMetaTime.innerHTML = data.author.created;
+        postMetaData.appendChild(postMetaTime);
 
         const postText = document.createElement('div');
         postText.classList.add('post__text');
+        postText.innerHTML = data.content;
         post.appendChild(postText);
 
         const postImgDiv = document.createElement('div');
-        postText.classList.add('post__image');
+        postImgDiv.classList.add('post__image');
         post.appendChild(postImgDiv);
 
         const postImg = document.createElement('img');
@@ -253,7 +255,19 @@ function printPost(data) {
         counter.innerHTML = `Piace a <b id="like-counter-${data.id}" class="js-likes-counter">${data.likes}</b> persone`;
         likes.appendChild(counter);
 
-    // }
     return post;
 }
+
+posts.forEach((post) => {
+    container.appendChild(printPost(post));
+});
+
+const likedPosts = [];
+
+const buttons = document.getElementsByClassName('js-like-button');
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+
+    });
+});
 
