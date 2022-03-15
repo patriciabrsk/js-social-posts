@@ -106,7 +106,6 @@ h1 {
 .like-button {
     display: inline-block;
     padding: 16px;
-    cursor: pointer;
     border-radius: 8px;    
     text-decoration: none;
     color: #404040;
