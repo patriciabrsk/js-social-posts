@@ -242,7 +242,7 @@ function printPost(data) {
 
         const likeBtn = document.createElement('a');
         likeBtn.classList.add('like-button', 'js-like-button');
-        likeBtn.setAttribute('post-id');
+        likeBtn.setAttribute('post-id', '');
         likeBtn['post-id'] = data.id;
         likesCta.appendChild(likeBtn);
 
