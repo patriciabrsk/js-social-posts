@@ -242,7 +242,8 @@ function printPost(data) {
 
         const likeBtn = document.createElement('a');
         likeBtn.classList.add('like-button', 'js-like-button');
-        likeBtn['liked-id'] = data.id;
+        likeBtn.setAttribute('post-id', '');
+        // likeBtn['post-id'] = data.id;
         likesCta.appendChild(likeBtn);
 
         const likeBtnIcon = document.createElement('i');
@@ -254,7 +255,6 @@ function printPost(data) {
         likeBtnLabel.classList.add('like-button__label');
         likeBtnLabel.innerText = "Mi Piace";
         likeBtn.appendChild(likeBtnLabel);
-
 
         const counter = document.createElement('div');
         counter.classList.add('likes__counter');
@@ -281,29 +281,11 @@ for (let i = 0; i < buttons.length; i++) {
         if (element.classList.contains('like-button--liked')) {
             element.classList.remove('like-button--liked');
             counters[i].innerHTML = parseInt(counters[i].innerHTML) - 1;
-            likedPosts.splice(likedPosts.indexOf(buttons[i].getAttribute('data-postid')));
+            likedPosts.splice(likedPosts.indexOf(buttons[i].getAttribute('postid')));
         } else {
             element.classList.add('like-button--liked');
             counters[i].innerHTML = parseInt(counters[i].innerHTML) + 1;
-            likedPosts.push(likedPosts[i].getAttribute('data-postid'));
+            likedPosts.push(buttons[i].getAttribute('post-id'));
         }
-    }
+    });
 }
-
-
-// let liked = false;
-// buttons.forEach((button) => {
-//     button.addEventListener('click', (event) => {
-//         button.classList.toggle('like-button--liked');
-
-        // if (!liked) {
-        //     liked = true;
-        //     event.classList.toggle('like-button--liked');
-        //     counter.innerHTML = `Piace a <b id="like-counter-${data.id}" class="js-likes-counter">${data.likes++}</b> persone`;
-        // } else {
-        //     liked = false;
-        //     counter.innerHTML = `Piace a <b id="like-counter-${data.id}" class="js-likes-counter">${data.likes--}</b> persone`;
-        // }
-
-//     });
-// });
