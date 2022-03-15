@@ -271,11 +271,30 @@ posts.forEach((post) => {
 const likedPosts = [];
 
 const buttons = document.getElementsByClassName('js-like-button');
+const counters = document.getElementsByClassName('js-likes-counter');
+
+for (let i = 0; i < buttons.length; i++) {
+    const element = buttons[i];
+
+    element.addEventListener('click', (event) => {
+
+        if (element.classList.contains('like-button--liked')) {
+            element.classList.remove('like-button--liked');
+            counters[i].innerHTML = parseInt(counters[i].innerHTML) - 1;
+            likedPosts.splice(likedPosts.indexOf(buttons[i].getAttribute('data-postid')));
+        } else {
+            element.classList.add('like-button--liked');
+            counters[i].innerHTML = parseInt(counters[i].innerHTML) + 1;
+            likedPosts.push(likedPosts[i].getAttribute('data-postid'));
+        }
+    }
+}
+
 
 // let liked = false;
-buttons.forEach((button) => {
-    button.addEventListener('click', (event) => {
-        event.classList.toggle('like-button--liked');
+// buttons.forEach((button) => {
+//     button.addEventListener('click', (event) => {
+//         button.classList.toggle('like-button--liked');
 
         // if (!liked) {
         //     liked = true;
@@ -286,6 +305,5 @@ buttons.forEach((button) => {
         //     counter.innerHTML = `Piace a <b id="like-counter-${data.id}" class="js-likes-counter">${data.likes--}</b> persone`;
         // }
 
-    });
-});
-
+//     });
+// });
