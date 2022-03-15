@@ -271,15 +271,20 @@ posts.forEach((post) => {
 const likedPosts = [];
 
 const buttons = document.getElementsByClassName('js-like-button');
+
+// let liked = false;
 buttons.forEach((button) => {
     button.addEventListener('click', (event) => {
-        let liked = event.classList.toggle('like-button--liked');
+        event.classList.toggle('like-button--liked');
 
-        if (liked) {
-            counter.innerHTML = `Piace a <b id="like-counter-${data.id}" class="js-likes-counter">${data.likes++}</b> persone`;
-        } else {
-            counter.innerHTML = `Piace a <b id="like-counter-${data.id}" class="js-likes-counter">${data.likes--}</b> persone`;
-        }
+        // if (!liked) {
+        //     liked = true;
+        //     event.classList.toggle('like-button--liked');
+        //     counter.innerHTML = `Piace a <b id="like-counter-${data.id}" class="js-likes-counter">${data.likes++}</b> persone`;
+        // } else {
+        //     liked = false;
+        //     counter.innerHTML = `Piace a <b id="like-counter-${data.id}" class="js-likes-counter">${data.likes--}</b> persone`;
+        // }
 
     });
 });
